@@ -2,6 +2,7 @@ import Fighter, { SimpleFighter } from './Fighter';
 import Race, { Elf } from './Races';
 import Archetype, { Mage } from './Archetypes';
 import { Energy } from './Energy';
+import getRandomInt from './utils';
 
 export default class Character implements Fighter {
   private _race: Race;
@@ -14,16 +15,16 @@ export default class Character implements Fighter {
   private _dexterity: number;
 
   constructor(name: string) {
-    this._dexterity = Math.floor(Math.random() * 10) + 1;
+    this._dexterity = getRandomInt(1, 10);
     this._race = new Elf(name, this._dexterity);
     this._archetype = new Mage(name);
     this._maxLifePoints = (this._race.maxLifePoints) / 2;
     this._lifePoints = this._maxLifePoints;
-    this._strength = Math.floor(Math.random() * 10) + 1;
-    this._defense = Math.floor(Math.random() * 10) + 1;
+    this._strength = getRandomInt(1, 10);
+    this._defense = getRandomInt(1, 10);
     this._energy = {
       type_: this._archetype.energyType, 
-      amount: Math.floor(Math.random() * 10) + 1,
+      amount: getRandomInt(1, 10),
     };
   }
 
@@ -67,10 +68,10 @@ export default class Character implements Fighter {
   }
 
   levelUp(): void {
-    this._maxLifePoints += Math.floor(Math.random() * 10) + 1;
-    this._strength += Math.floor(Math.random() * 10) + 1;
-    this._dexterity += Math.floor(Math.random() * 10) + 1;
-    this._defense += Math.floor(Math.random() * 10) + 1;
+    this._maxLifePoints += getRandomInt(1, 10);
+    this._strength += getRandomInt(1, 10);
+    this._dexterity += getRandomInt(1, 10);
+    this._defense += getRandomInt(1, 10);
     this._energy.amount = 10;
 
     if (this._maxLifePoints > this._race.maxLifePoints) {
